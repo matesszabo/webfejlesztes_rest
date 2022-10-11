@@ -1,15 +1,24 @@
 package hu.unideb.inf.orairest.Entities;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tulajdonosok")
 public class TulajdonosEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "nev")
     private String nev;
+    @Column(name = "szemelyi")
     private String szemelyi;
+    @Column(name = "szuldatum")
     private Date szuldatum;
+    @OneToMany(mappedBy = "tulajdonos")
     private List<AutoEntity> autok;
 
     public TulajdonosEntity() {
@@ -28,6 +37,12 @@ public class TulajdonosEntity {
         this.szemelyi = szemelyi;
         this.szuldatum = szuldatum;
         this.autok = autok;
+    }
+
+    public TulajdonosEntity(String nev, String szemelyi, Date szuldatum) {
+        this.nev = nev;
+        this.szemelyi = szemelyi;
+        this.szuldatum = szuldatum;
     }
 
     public long getId() {
